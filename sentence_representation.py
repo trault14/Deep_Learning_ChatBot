@@ -1,14 +1,14 @@
-import sys
-import numpy as np
+import embeddings_load
 
 
-message = sys.argv[1]
-embeddings_index = sys.argv[2]
-words = message.split(" ")
-sum = 0
-for word in words:
-    sum += abs(embeddings_index[word])
+embeddings_table = embeddings_load.load_embeddings_table()
 
-sum = np.mean(sum)
-print(sum)
-sys.stdout.flush()
+
+def sentence_representation(message):
+    words = list(map(str.lower, message.split("_")))
+    s = []
+    for word in words:
+        if word in embeddings_table.keys():
+            s.append(embeddings_table[word].reshape(50, 1))
+
+    return s

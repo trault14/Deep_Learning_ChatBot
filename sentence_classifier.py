@@ -56,7 +56,7 @@ def train_classifier(data):
         y.extend([intent] * len(sentences))
 
     # Format the sentences
-    format_data(x)
+    x = format_data(x)
 
     # Convert the sentences to their numerical representation
     x = list(map(sentence_representation, x))
@@ -107,3 +107,4 @@ def format_data(x):
     x = list(map(lambda s: s.replace("(location)", ""), x))
     x = list(map(lambda s: s.replace("(cuisine)", ""), x))
     x = list(map(lambda s: s.replace("(time)", ""), x))
+    return x
